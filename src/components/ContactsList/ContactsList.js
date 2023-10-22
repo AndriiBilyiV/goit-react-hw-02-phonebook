@@ -1,11 +1,14 @@
-export const ContactsList = ({ contacts }) => {
-    
+import { ContactCard } from "components/ContactCard/ContactCard";
+import { List } from "./ContactsList.styled";
+
+export const ContactsList = ({ contacts, delContact }) => {
     return (
-        <ul>
+        <List>
             {contacts.map(item => {
-                const { name, id, tel } = item;
-                return <li key={id}>{name}: {tel}</li>
+                return  <li key={item.id}>
+                    <ContactCard item={item} delContact={delContact} />
+                </li>
             })}
-        </ul>
+        </List>
     )
 }
