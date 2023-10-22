@@ -16,7 +16,7 @@ export class App extends Component {
   addContact = ({ name, tel }) => {
     const names = this.state.contacts.map(contact => contact.name);
     if (names.includes(name)) {
-      alert("No way")
+      alert(`${name} is alredy in contact list`)
       return
     }
     this.setState(prevState => ({
