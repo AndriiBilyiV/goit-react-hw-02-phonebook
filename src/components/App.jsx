@@ -14,8 +14,9 @@ export class App extends Component {
   };
 
   addContact = ({ name, tel }) => {
-    const names = this.state.contacts.map(contact => contact.name);
-    if (names.includes(name)) {
+
+    const names = this.state.contacts.map(contact => contact.name.toLowerCase());
+    if (names.find(contact => contact === name.toLowerCase())) {
       alert(`${name} is alredy in contact list`)
       return
     }
@@ -35,18 +36,16 @@ export class App extends Component {
       filter: newFilter
     })
   }
+  getFilteredContacts = () => {
+    return (
+    this.state.contacts.filter(contact => {
+      return contact.name.toLowerCase()
+        .includes(this.state.filter.toLowerCase())
+    }))
+  }
 
   render() {
-    const nameFilter = this.state.filter.toLowerCase();
-    let contacts = this.state.contacts
-    if (this.state.filter) {
-      const contactsByName = contacts.filter(contact => {
-       return contact.name.toLowerCase()
-          .includes(nameFilter)
-      })
-      contacts = contactsByName;
-    }
-    
+    const contacts = this.getFilteredContacts()
     return (
       <div>
         <h2>PhoneBook</h2>
